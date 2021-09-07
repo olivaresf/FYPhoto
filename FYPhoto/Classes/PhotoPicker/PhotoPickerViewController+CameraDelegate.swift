@@ -22,7 +22,7 @@ extension PhotoPickerViewController: CameraViewControllerDelegate {
             
             cameraViewController.dismiss(animated: true) {
                 
-                SaveMediaTool.saveImageDataToAlbums(data) { (result) in
+				SaveMediaTool.shared.saveImageDataToAlbums(data) { (result) in
                     var asset: PHAsset?
                     switch result {
                     case .success(_):
@@ -68,7 +68,7 @@ extension PhotoPickerViewController: VideoPreviewControllerDelegate {
     public func videoPreviewController(_ preview: VideoPreviewController, didSaveVideoAt path: URL) {
         preview.delegate = nil
 //        print("video path: \(path)\npath.path: \(path.path)")
-        SaveMediaTool.saveVideoDataToAlbums(path) { result in
+		SaveMediaTool.shared.saveVideoDataToAlbums(path) { result in
             DispatchQueue.main.async {
                 preview.dismiss(animated: true, completion: {
                     switch result {
